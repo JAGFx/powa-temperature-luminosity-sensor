@@ -1,1 +1,1 @@
-# electricity-meter-pulse-detector
+# powa-temperature-luminosity-sensor
