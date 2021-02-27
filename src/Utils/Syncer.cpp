@@ -89,14 +89,6 @@ void Syncer::resetResultReceive() {
     _resultReceive = RESULT_NONE;
 }
 
-void Syncer::resetWhCounter() {
-    if ( _resultSend == RESULT_SUCCESS && _resultReceive == RESULT_ERROR_RECEIVE )
-        _whCounter = 0;
-    
-    if ( _resultSend == RESULT_SUCCESS && _resultReceive == RESULT_SUCCESS )
-        _whCounter = 0;
-}
-
 // ---
 
 Syncer::Syncer( const uint8_t &ledPin ) : _ledPin( ledPin ) {
@@ -131,7 +123,6 @@ void Syncer::sync() {
         if ( reconnect() ) {
             send();
             receive();
-            resetWhCounter();
         }
 
 //        Serial.print( "_client->connected(): " );
@@ -148,16 +139,9 @@ void Syncer::sync() {
 // ---
 
 bool Syncer::enableToSync() const {
-    return _cycleCounter >= Syncer::CYCLE && _whCounter > 0;
+    return _cycleCounter >= Syncer::CYCLE && _cycleCounter > 0;
 }
 
-
-void Syncer::increaseWhCounter() {
-    _whCounter++;
-}
-
-// ---
-
-uint16_t Syncer::getWhCounter() const {
-    return _whCounter;
+uint16_t Syncer::getCycleCount() const {
+    return _cycleCounter;
 }

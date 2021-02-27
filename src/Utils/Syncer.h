@@ -41,8 +41,6 @@ private:
     void resetResultSend();
     
     void resetResultReceive();
-    
-    void resetWhCounter();
 
 public:
 //    static const uint16_t CYCLE         = 50; // Test
@@ -79,12 +77,7 @@ public:
     
     bool enableToSync() const;
     
-    void increaseWhCounter();
-    
-    // ---
-    
-    uint16_t getWhCounter() const;
-    
+    uint16_t getCycleCount() const;
 };
 
 

@@ -18,23 +18,13 @@
 class Oled {
 private:
     Adafruit_SSD1306 *_screen;
-    float            _whCount = 0;
-    
-    // --
-    
-    const char *getUnit() const;
-    
-    float getValue() const;
-    
-    uint8_t getPrecision();
+    boolean          _side       = true;
+    uint16_t         _cycleCount = CYCLE_MAX;
 
 public:
-    static constexpr const char *UNIT_WH       = " Wh";
-    static constexpr const char *UNIT_KWH      = " KWh";
-    static constexpr const char *UNIT_MWH      = " MWh";
-    static const uint8_t        PRECISION_10   = 2;
-    static const uint8_t        PRECISION_100  = 1;
-    static const uint8_t        PRECISION_1000 = 0;
+    static constexpr const char *UNIT_LUX    = " lux";
+    static constexpr const char *UNIT_DEGREE = " °C";
+    static const uint16_t       CYCLE_MAX    = 20;
     
     // --
     
@@ -43,7 +33,7 @@ public:
     // --
     void begin();
     
-    void loop( uint16_t syncerCount );
+    void loop( uint16_t syncerCount, float lux, float temp );
     
     void print( const char *str, bool clear = true );
     
@@ -52,10 +42,6 @@ public:
     void printLn( const Printable &x, bool clear = true );
     
     void printLn( unsigned char b, bool clear = true );
-    
-    void whIncrease();
-    
-    void whReset();
 };
 
 
